@@ -29,7 +29,7 @@ run = function() {
   extract_all_zip("/root/art")
   
   
-  suppressPackageStartupMessages(library(repboxverse))
+  suppressPackageStartupMessages(library(repboxRun))
   
   # Writen files can be changed and read by all users
   # So different containers can access them
