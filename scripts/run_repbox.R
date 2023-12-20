@@ -52,10 +52,17 @@ run = function() {
   html_files = list.files("/root/art", glob2rx("*.html"), ignore.case=TRUE, full.names = TRUE,recursive = TRUE)
   
   
-  project.dir = "/root/projects/project"
-  repbox_init_project(project.dir,sup_zip = sup_zip,pdf_files = pdf_files, html_files = html_files)
+  project_dir = "/root/projects/project"
+  dir.create(project_dir)
+  repbox_init_project(project_dir,sup_zip = sup_zip,pdf_files = pdf_files, html_files = html_files)
   
   # List files in sup folder
+  cat("\n/:\n")
+  list.dirs("/",recursive = FALSE)
+
+  cat("\n/root:\n")
+  list.dirs("/root", recursive=FALSE)
+  
   cat("\nproject_dir:\n")
   list.dirs("/root/projects/project")
   cat("\n\n\nsup_dir:\n")
