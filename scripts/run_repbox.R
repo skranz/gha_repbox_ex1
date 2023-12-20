@@ -66,6 +66,8 @@ run = function() {
   cat("\n\n\nsup_dir:\n")
   print(list.files("/root/projects/project/sup",recursive = TRUE))
   
+  print(stringtools::str.left.of)
+  
   # Just print some size information
   all.files = list.files(file.path(project_dir, "org"),glob2rx("*.*"),recursive = TRUE, full.names = TRUE)
   org.mb = sum(file.size(all.files),na.rm = TRUE) / 1e6
