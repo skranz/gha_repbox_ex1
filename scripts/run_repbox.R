@@ -66,7 +66,7 @@ run = function() {
   cat("\n\n\nsup_dir:\n")
   print(list.files("/root/projects/project/sup",recursive = TRUE))
   
-  print(stringtools::str.left.of)
+  print(str.left.of)
   
   # Just print some size information
   all.files = list.files(file.path(project_dir, "org"),glob2rx("*.*"),recursive = TRUE, full.names = TRUE)
