@@ -2,6 +2,8 @@
 # Author: Sebastian Kranz
 
 run = function() {
+  source("install.R")
+  
   cat("\n\nREPBOX ANALYSIS START\n")
   
   io_config = yaml::yaml.load_file("/root/io_config.yml")
