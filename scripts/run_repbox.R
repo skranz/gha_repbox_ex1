@@ -57,16 +57,14 @@ run = function() {
   repbox_init_project(project_dir,sup_zip = sup_zip,pdf_files = pdf_files, html_files = html_files)
   
   # List files in sup folder
-  cat("\n/:\n")
-  list.dirs("/",recursive = FALSE)
 
   cat("\n/root:\n")
-  list.dirs("/root", recursive=FALSE)
+  cat(paste0(list.dirs("/root", recursive=FALSE), collapse="\n"))
   
   cat("\nproject_dir:\n")
-  list.dirs("/root/projects/project")
+  print(list.dirs("/root/projects/project"))
   cat("\n\n\nsup_dir:\n")
-  list.files("/root/projects/project/sup",recursive = TRUE)
+  print(list.files("/root/projects/project/sup",recursive = TRUE))
   
   # Just print some size information
   all.files = list.files(file.path(project_dir, "org"),glob2rx("*.*"),recursive = TRUE, full.names = TRUE)
@@ -75,7 +73,7 @@ run = function() {
   cat("\nSUPPLEMENT UNPACKED SIZE: ", round(org.mb,2), " MB\n")
 
   opts = repbox_run_opts()
-  repbox_run_project(project.dir, lang = c("stata","r"), opts=opts)
+  repbox_run_project(project_dir, lang = c("stata","r"), opts=opts)
   
   system("chmod -R 777 /root/projects")
   
