@@ -53,6 +53,12 @@ run = function() {
   project.dir = "/root/projects/project"
   repbox_init_project(project.dir,sup_zip = sup_zip,pdf_files = pdf_files, html_files = html_files)
   
+  # List files in sup folder
+  cat("\nproject_dir:\n")
+  list.dirs("/root/projects/project")
+  cat("\n\n\nsup_dir:\n")
+  list.files("/root/projects/project/sup",recursive = TRUE)
+  
   # Just print some size information
   all.files = list.files(file.path(project_dir, "org"),glob2rx("*.*"),recursive = TRUE, full.names = TRUE)
   org.mb = sum(file.size(all.files),na.rm = TRUE) / 1e6
