@@ -2,11 +2,18 @@
 # Author: Sebastian Kranz
 
 run = function() {
-  cat("\nInstall selected filed\n")
+  cat("\nInstall R packages specified in install.R\n")
   source(file.path("~/scripts/install.R"))
   
-  cat("\n\nREPBOX ANALYSIS START\n")
+  cat("\n\nCheck Stata License\n\n")
+  license.file = "/usr/local/stata/stata.lic"
+  if (!file.exists(license.file)) {
+    cat("\nWarning: No Stata license found.\nYou need to specify the license in your Github Repo via a Github action secret variable STATA_LIC.\nPlease read the documentation for the repbox Github action pipeline.\n")
+  } else {
+    cat("\nStata license found.\n")
+  }
   
+  cat("\n\nREPBOX ANALYSIS START\n")
   io_config = yaml::yaml.load_file("/root/io_config.yml")
   
   # Possibly download files
