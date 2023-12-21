@@ -90,9 +90,18 @@ run = function() {
   # Store results as encrypted 7z
   cat("\nStore results as 7z")
   #dir.create("/root/output")
+  
+  if (isTRUE(io_config$output$encryption)) {
+    cat("\nStore results as encrypted 7z")
+    key = Sys.getenv("REPBOX_ENCRYPT_KEY")
+    to.7z("/root/projects/project/art","/root/output/art.7z",password = key)
+  } else {
+    cat("\nStore results as 7z")
+    to.7z("/root/projects/project/reports","/root/output/results.7z")
+  }
+  
   key = Sys.getenv("REPBOX_ENCRYPT_KEY")
   #to.7z("/root/projects/project/reports","/root/output/reports.7z",password = key)
-  to.7z("/root/projects/project/reports","/root/output/results.7z")
   
   cat(paste0("\nAnalysis finished after ", round(difftime(Sys.time(),start.time, units="mins"),1)," minutes.\n"))
   
