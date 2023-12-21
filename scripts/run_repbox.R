@@ -74,7 +74,8 @@ run = function() {
   cat("\n\n\nsup_dir:\n")
   print(list.files("/root/projects/project/sup",recursive = TRUE))
   
-  print(str.left.of)
+  cat("\ninit.somo.single.code\n")
+  print(init.somo.single.code)
   
   # Just print some size information
   all.files = list.files(file.path(project_dir, "org"),glob2rx("*.*"),recursive = TRUE, full.names = TRUE)
