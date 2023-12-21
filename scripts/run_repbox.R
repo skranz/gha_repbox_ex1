@@ -91,7 +91,8 @@ run = function() {
   cat("\nStore results as 7z")
   #dir.create("/root/output")
   key = Sys.getenv("REPBOX_ENCRYPT_KEY")
-  to.7z("/root/projects/project","/root/output/project.7z",password = key)
+  #to.7z("/root/projects/project/reports","/root/output/reports.7z",password = key)
+  to.7z("/root/projects/project/reports","/root/output/reports.7z")
   
   cat(paste0("\nAnalysis finished after ", round(difftime(Sys.time(),start.time, units="mins"),1)," minutes.\n"))
   
