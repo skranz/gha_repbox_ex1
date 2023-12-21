@@ -2,3 +2,4 @@
 
 library(remotes)
 remotes::install_github("repboxr/sourcemodify", upgrade="never", force=FALSE)
+remotes::install_github("repboxr/repboxMap", upgrade="never", force=FALSE)
