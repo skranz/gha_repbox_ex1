@@ -2,7 +2,8 @@
 # Author: Sebastian Kranz
 
 run = function() {
-  source("install.R")
+  cat("\nInstall selected filed\n")
+  source(file.path("~/scripts/install.R"))
   
   cat("\n\nREPBOX ANALYSIS START\n")
   
