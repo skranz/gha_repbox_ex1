@@ -1,6 +1,12 @@
 # This script will be run by a repbox analysis docker container
 # Author: Sebastian Kranz
 
+copy.dir = function(from, to) {
+  files = list.files(from, recurse=TRUE)
+  if (!dir.exists(to)) dir.create(to, recursive=TRUE)
+  file.copy(files, to)
+}
+
 run = function() {
   io_config = yaml::yaml.load_file("/root/io_config.yml")
 
@@ -72,19 +78,6 @@ run = function() {
   dir.create(project_dir)
   repbox_init_project(project_dir,sup_zip = sup_zip,pdf_files = pdf_files, html_files = html_files)
   
-  # List files in sup folder
-
-  cat("\n/root:\n")
-  cat(paste0(list.dirs("/root", recursive=FALSE), collapse="\n"))
-  
-  cat("\nproject_dir:\n")
-  print(list.dirs("/root/projects/project"))
-  cat("\n\n\nsup_dir:\n")
-  print(list.files("/root/projects/project/sup",recursive = TRUE))
-  
-  cat("\ninit.somo.single.code\n")
-  print(init.somo.single.code)
-  
   # Just print some size information
   all.files = list.files(file.path(project_dir, "org"),glob2rx("*.*"),recursive = TRUE, full.names = TRUE)
   org.mb = sum(file.size(all.files),na.rm = TRUE) / 1e6
@@ -105,21 +98,15 @@ run = function() {
     to.7z("/root/projects/project/reports","/root/output/results.7z",password = password)
   } else {
     cat("\nStore results\n")
-    dir.create("/root/projects/output/reports")
-    print(file.copy("/root/projects/project/reports", "/root/projects/output/reports",recursive = TRUE))
-    cat("\nFiles in output:")
-    
-    print(list.files("/root/projects/output/",recursive = TRUE))
+    copy.dir("/root/projects/project/reports", "/root/output")
+    cat("\nFiles in reports:")
+    print(list.files("/root/projects/reports/",recursive = TRUE    cat("\nFiles in output:")
+    print(list.files("/root/output/",recursive = TRUE))
   }
-  
   key = Sys.getenv("REPBOX_ENCRYPT_KEY")
   #to.7z("/root/projects/project/reports","/root/output/reports.7z",password = key)
   
   cat(paste0("\nAnalysis finished after ", round(difftime(Sys.time(),start.time, units="mins"),1)," minutes.\n"))
-  
-  cat("\nCPU INFO START\n\n")
-  system("cat /proc/cpuinfo")
-  cat("\nCPU INFO END\n\n")
   
   cat("\nMEMORY INFO START\n\n")
   system("cat /proc/meminfo")
