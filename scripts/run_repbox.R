@@ -100,7 +100,8 @@ run = function() {
     cat("\nStore results\n")
     copy.dir("/root/projects/project/reports", "/root/output")
     cat("\nFiles in reports:")
-    print(list.files("/root/projects/reports/",recursive = TRUE    cat("\nFiles in output:")
+    print(list.files("/root/projects/reports/",recursive = TRUE))
+    cat("\nFiles in output:")
     print(list.files("/root/output/",recursive = TRUE))
   }
   key = Sys.getenv("REPBOX_ENCRYPT_KEY")
