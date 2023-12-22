@@ -101,12 +101,15 @@ run = function() {
   #dir.create("/root/output")
   
   if (isTRUE(io_config$output$encryption)) {
-    cat("\nStore results as encrypted 7z")
+    cat("\nStore results as encrypted 7z\n")
     to.7z("/root/projects/project/reports","/root/output/results.7z",password = password)
   } else {
-    cat("\nStore results")
+    cat("\nStore results\n")
     dir.create("/root/projects/output/reports")
-    file.copy("/root/projects/project/reports", "/root/projects/output/reports",recursive = TRUE)
+    print(file.copy("/root/projects/project/reports", "/root/projects/output/reports",recursive = TRUE))
+    cat("\nFiles in output:")
+    
+    print(list.files("/root/projects/output/",recursive = TRUE))
   }
   
   key = Sys.getenv("REPBOX_ENCRYPT_KEY")
