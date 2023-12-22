@@ -1,10 +1,12 @@
 # This script will be run by a repbox analysis docker container
 # Author: Sebastian Kranz
 
-my.dir.copy = function(from, to) {
-  files = list.files(from, recursive=TRUE)
-  if (!dir.exists(to)) dir.create(to, recursive=TRUE)
-  file.copy(files, to)
+my.dir.copy = function (from, to, ...) {
+    if (!dir.exists(to)) 
+        dir.create(to, recursive = TRUE)
+    res = file.copy(list.files(from, full.names = TRUE), to, 
+        recursive = TRUE, ...)
+    invisible(all(res))
 }
 
 run = function() {
@@ -100,7 +102,7 @@ run = function() {
     cat("\nStore results\n")
     my.dir.copy("/root/projects/project/reports", "/root/output")
     cat("\nFiles in reports:")
-    print(list.files("/root/projects/reports/",recursive = TRUE))
+    print(list.files("/root/projects/project/reports",recursive = TRUE))
     cat("\nFiles in output:")
     print(list.files("/root/output/",recursive = TRUE))
   }
