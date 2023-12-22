@@ -2,7 +2,7 @@
 # Author: Sebastian Kranz
 
 my.dir.copy = function(from, to) {
-  files = list.files(from, recurse=TRUE)
+  files = list.files(from, recursive=TRUE)
   if (!dir.exists(to)) dir.create(to, recursive=TRUE)
   file.copy(files, to)
 }
