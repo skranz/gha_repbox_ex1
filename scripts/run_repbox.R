@@ -7,7 +7,7 @@ run = function() {
   if (isTRUE(io_config$output$encryption)) {
     password = Sys.getenv("REPBOX_ENCRYPT_KEY")
     if (password=="") {
-      stop("The io_config.yml specified that the output is encrypted. This requires that you specify the password as a Github Repository Secret with nam REPBOX_ENCRYPT_KEY.")
+      stop("The io_config.yml specified that the output is encrypted. This requires that you specify the password as a Github Repository Secret with name REPBOX_ENCRYPT_KEY.")
     } 
   }
   
