@@ -2,6 +2,15 @@
 # Author: Sebastian Kranz
 
 run = function() {
+  io_config = yaml::yaml.load_file("/root/io_config.yml")
+
+  if (isTRUE(io_config$output$encryption)) {
+    password = Sys.getenv("REPBOX_ENCRYPT_KEY")
+    if (password=="") {
+      stop("The io_config.yml specified that the output is encrypted. This requires that you specify the password as a Github Repository Secret with nam REPBOX_ENCRYPT_KEY.")
+    } 
+  }
+  
   cat("\nInstall R packages specified in install.R\n")
   source(file.path("~/scripts/install.R"))
   
@@ -14,7 +23,6 @@ run = function() {
   }
   
   cat("\n\nREPBOX ANALYSIS START\n")
-  io_config = yaml::yaml.load_file("/root/io_config.yml")
   
   # Possibly download files
   if (isTRUE(io_config$art$download)) {
@@ -94,11 +102,11 @@ run = function() {
   
   if (isTRUE(io_config$output$encryption)) {
     cat("\nStore results as encrypted 7z")
-    key = Sys.getenv("REPBOX_ENCRYPT_KEY")
-    to.7z("/root/projects/project/art","/root/output/art.7z",password = key)
+    to.7z("/root/projects/project/reports","/root/output/results.7z",password = password)
   } else {
-    cat("\nStore results as 7z")
-    to.7z("/root/projects/project/reports","/root/output/results.7z")
+    cat("\nStore results")
+    dir.create("/root/projects/output/reports")
+    file.copy("/root/projects/project/reports", "/root/projects/output/reports",recursive = TRUE)
   }
   
   key = Sys.getenv("REPBOX_ENCRYPT_KEY")
