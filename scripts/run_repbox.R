@@ -17,6 +17,8 @@ run = function() {
     if (password=="") {
       stop("The io_config.yml specified that the output is encrypted. This requires that you specify the password as a Github Repository Secret with name REPBOX_ENCRYPT_KEY.")
     } 
+  } else {
+    password=NULL
   }
   
   cat("\nInstall R packages specified in install.R\n")
@@ -68,6 +70,8 @@ run = function() {
   # 
   sup_zip = list.files("/root/sup", glob2rx("*.zip"), ignore.case=TRUE, full.names = TRUE,recursive = TRUE)
   if (length(sup_zip) != 1) {
+    cat("\nFiles in /root/sup...\n")
+    print(list.files("/root/sup", glob2rx("*"), ignore.case=TRUE, full.names = TRUE,recursive = TRUE))
     stop("After download and extraction of 7z, there must be exactly one ZIP file in the /root/sup directory.")
   }
 
