@@ -1,5 +1,6 @@
-# These options correspond to arguments to 
-# repbox_run_project
+# THIS CONFIRGURATION FILE IS NOT YET USED
+# GOAL: WE CAN SPECIFY OPTIONS FOR REPBOX RUN HERE
+
 lang: [r,stata]
 
 # If you only want to perform a subset of steps
